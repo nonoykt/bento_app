@@ -1,11 +1,11 @@
 class Admin::ShopsController < ApplicationController
+  before_action :set_shop, only: [:show, :edit, :update, :destroy]
 
   def index
     @shops = Shop.all
   end
 
   def show
-    @shop = Shop.find(params[:id])
   end
 
   def new
@@ -13,7 +13,6 @@ class Admin::ShopsController < ApplicationController
   end
 
   def edit
-    @shop = Shop.find(params[:id])
   end
 
   def create
@@ -27,8 +26,6 @@ class Admin::ShopsController < ApplicationController
   end
 
   def update
-    @shop = Shop.find(params[:id])
-
     if @shop.update
       redirect_to admin_shop_url(@shop), notice: "ショップ「#{@shop.name}」を更新しました！"
     else
@@ -37,7 +34,6 @@ class Admin::ShopsController < ApplicationController
   end
 
   def destroy
-    @shop = Shop.find(params[:id])
     @shop.destroy
     redirect_to admin_shops_url, notice: "ショップ「#{@shop.name}」を閉店しました。"
   end
@@ -45,6 +41,14 @@ class Admin::ShopsController < ApplicationController
   private
 
   def shop_params
-    params(:shop).permit(:name, :email, :admin, :password, :password_confirmation)
+    params.require(:shop).permit(:name, :owner, :email, :admin, :password, :password_confirmation)
+  end
+
+  def required_admin
+    redirect_to root_url unless current_shop.admin?
+  end
+
+  def set_shop
+    @shop = Shop.find(params[:id])
   end
 end

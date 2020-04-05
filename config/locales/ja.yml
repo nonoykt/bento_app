@@ -19,6 +19,7 @@ ja:
         updated_at: 更新日時
       shop:
         name: ショップ名
+        owner: オーナー様
         email: メールアドレス
         admin: 管理者権限
         password: パスワード

@@ -10,6 +10,16 @@ html
   body
     .app-title.navbar.navbar-expand-md.navbar-light.bg-light
       .navbar-brand Bento
+
+      ul.navbar-nav.ml-auto
+        - if current_shop
+          li.nav-item= link_to '御弁当一覧', bentos_path, class: 'nav-link'
+          - if current_shop.admin?
+            li.nav-item= link_to 'ショップ一覧', admin_shops_path, class: 'nav-link'
+          li.nav-item= link_to 'ログアウト', logout_path, method: :delete, class: 'nav-link'
+        - else
+          li.nav-item= link_to '新規ショップ登録', new_admin_shop_path, class: 'nav-link'
+          li.nav-item= link_to 'ログイン', login_path, class: 'nav-link'
     .container
       - if flash.notice.present?
         .alert.alert-success = flash.notice

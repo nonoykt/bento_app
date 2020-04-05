@@ -3,6 +3,9 @@ class Bento < ApplicationRecord
   validates :name, presence: true
   validates :name, length: { maximum: 30 }
 
+  belongs_to :shop
+  scope :recent, -> { order(created_at: :desc) }
+
   private
 
   def set_nameless_name

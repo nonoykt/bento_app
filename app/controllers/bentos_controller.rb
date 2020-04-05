@@ -1,10 +1,11 @@
 class BentosController < ApplicationController
+  before_action :set_bento, only: [:show, :edit, :update, :destroy]
+
   def index
-    @bentos = Bento.all
+    @bentos = current_shop.bentos.order(created_at: :desc)
   end
 
   def show
-    @bento = Bento.find(params[:id])
   end
 
   def new
@@ -12,23 +13,20 @@ class BentosController < ApplicationController
   end
 
   def edit
-    @bento = Bento.find(params[:id])
   end
 
   def update
-    bento = Bento.find(params[:id])
-    bento.update!(bento_params)
-    redirect_to bentos_url, notice: "御弁当「#{bento.name}」を更新しました！"
+    @bento.update!(bento_params)
+    redirect_to bentos_url, notice: "御弁当「#{@bento.name}」を更新しました！"
   end
 
   def destroy
-    bento = Bento.find(params[:id])
-    bento.destroy
-    redirect_to bentos_url, notice: "御弁当「#{bento.name}」を削除しました。"
+    @bento.destroy
+    redirect_to bentos_url, notice: "御弁当「#{@bento.name}」を削除しました。"
   end
 
   def create
-    @bento = Bento.new(bento_params)
+    @bento = current_shop.bentos.new(bento_params)
 
     if @bento.save
       redirect_to bentos_url, notice: "御弁当「#{@bento.name}」を登録しました！"
@@ -41,5 +39,9 @@ class BentosController < ApplicationController
 
   def bento_params
     params.require(:bento).permit(:name, :description)
+  end
+
+  def set_bento
+    @bento = current_shop.bentos.find(params[:id])
   end
 end
