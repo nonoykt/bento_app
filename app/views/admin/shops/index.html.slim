@@ -1,0 +1,26 @@
+h1 ショップ一覧
+
+= link_to 'ショップ開店', new_admin_shop_path, class: 'nav-link'
+
+.mb-3
+table.table.table-hover
+  thead.thead-default
+    tr
+      th= Shop.human_attribute_name(:name)
+      th= Shop.human_attribute_name(:email)
+      th= Shop.human_attribute_name(:admin)
+      th= Shop.human_attribute_name(:created_at)
+      th= Shop.human_attribute_name(:updated_at)
+      th
+    tbody
+      - @shops.each do |shop|
+        tr
+          td= link_to shop.name, [:admin, shop]
+          td= shop.name
+          td= shop.admin? ? 'yes' : 'no'
+          td= shop.created_at
+          td= shop.updated_at
+          td
+            = link_to '編集', edit_admin_shop_path(shop), class: 'btn btn-primary mr-3'
+            = link_to '削除', [:admin, shop], method: :delete,
+                date: { confirm: "ショップ「#{shop.name}」を閉店します。宜しいでしょうか？"}, class: 'btn btn-danger'

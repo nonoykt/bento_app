@@ -9,6 +9,7 @@ ja:
           has_many: "%{record}が存在しているので削除できません"
     models:
       bento: 御弁当
+      shop: ショップ
     attributes:
       bento:
         id: ID
@@ -17,7 +18,7 @@ ja:
         created_at: 登録日時
         updated_at: 更新日時
       shop:
-        name: 名前
+        name: ショップ名
         email: メールアドレス
         admin: 管理者権限
         password: パスワード

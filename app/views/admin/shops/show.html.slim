@@ -1,0 +1,28 @@
+h1 ショップ詳細
+
+.nav.justify-conten-end
+  = link_to 'ショップ一覧', admin_shops_path, class: 'nav-link'
+table.table.table-hover
+  tbody
+    tr
+      th= Shop.human_attribute_name(:id)
+      td= @shop.id
+    tr
+      th= Shop.human_attribute_name(:name)
+      td= @shop.name
+    tr
+      th= Shop.human_attribute_name(:email)
+      td= @shop.email
+    tr
+      th= Shop.human_attribute_name(:admin)
+      td= @shop.admin? ? 'yes' : 'no'
+    tr
+      th= Shop.human_attribute_name(:created_at)
+      td= @shop.created_at
+    tr
+      th= Shop.human_attribute_name(:updated_at)
+      td= @shop.updated_at
+
+= link_to '編集', edit_admin_shop_path, class: 'btn btn-primary mr-3'
+= link_to '削除', [:admin, @shop], method: :delete,
+    data: { confirm: "ショップ「#{@shop.name}」を閉店します。宜しいでしょうか？"}, class: 'btn btn-danger'
