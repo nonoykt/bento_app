@@ -1,0 +1,6 @@
+h1 御弁当作り替え
+
+.nav.justify-content-end
+  = link_to '御弁当一覧', bentos_path, class: 'nav-link'
+
+= render partial: 'form', locals: { bento: @bento }

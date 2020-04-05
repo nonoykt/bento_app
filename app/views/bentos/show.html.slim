@@ -1,0 +1,25 @@
+h1 御弁当詳細
+
+.nav.justify-content-end
+  = link_to '御弁当一覧', bentos_path, class: 'nav-link'
+table.table.table-hover
+  tbody
+    tr
+      th= Bento.human_attribute_name(:id)
+      td= @bento.id
+    tr
+      th= Bento.human_attribute_name(:name)
+      td= @bento.name
+    tr
+      th= Bento.human_attribute_name(:description)
+      td= simple_format(h(@bento.description), {}, sanitize: false, wrapper_tag: "div")
+    tr
+      th= Bento.human_attribute_name(:created_at)
+      td= @bento.created_at
+    tr
+      th= Bento.human_attribute_name(:updated_at)
+      td= @bento.updated_at
+
+= link_to '編集', edit_bento_path, class: 'btn btn-primary mr-3'
+= link_to '削除', @bento, method: :delete,
+          data: { confirm: "御弁当「#{@bento.name}」を削除します。よろしいでしょうか？"}, class: 'btn btn-danger'

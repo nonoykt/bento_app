@@ -1,0 +1,19 @@
+h1 御弁当一覧
+
+= link_to '御弁当登録', new_bento_path, class: 'btn btn-primary'
+
+.mb-3
+table.table.table-hover
+  thead.thead-default
+    tr
+      th= Bento.human_attribute_name(:name)
+      th= Bento.human_attribute_name(:created_at)
+  tbody
+    - @bentos.each do |bento|
+      tr
+        td= link_to bento.name, bento
+        td= bento.created_at
+        td
+          = link_to '編集', edit_bento_path(bento), class: 'btn btn-primary mr-3'
+          = link_to '削除', bento, method: :delete,
+              data: { confirm: "御弁当「#{bento.name}」を削除します。よろしいでしょうか？"}, class: 'btn btn-danger'
