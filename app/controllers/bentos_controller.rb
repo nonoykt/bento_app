@@ -24,14 +24,14 @@ class BentosController < ApplicationController
   def destroy
     bento = Bento.find(params[:id])
     bento.destroy
-    redirect_to bentos_url, notice: "御弁当「#{bento.name}を削除しました。」"
+    redirect_to bentos_url, notice: "御弁当「#{bento.name}」を削除しました。"
   end
 
   def create
     @bento = Bento.new(bento_params)
 
     if @bento.save
-      redirect_to bentos_url, notice: "御弁当「#{bento.name}」を登録しました！"
+      redirect_to bentos_url, notice: "御弁当「#{@bento.name}」を登録しました！"
     else
       render :new
     end
