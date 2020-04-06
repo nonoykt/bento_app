@@ -1,6 +1,6 @@
 - if shop.errors.present?
   ul#error_explanation
-  - user.errors.full_messages.each do |message|
+  - shop.errors.full_messages.each do |message|
     li= full_message
 
 = form_with model: [:admin, shop], local: true do |f|

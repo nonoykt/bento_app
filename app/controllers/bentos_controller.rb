@@ -29,12 +29,17 @@ class BentosController < ApplicationController
     @bento = current_shop.bentos.new(bento_params)
 
     if @bento.save
+      logger.debug "bento: #{@bento.attributes.inspect}"
       redirect_to bentos_url, notice: "御弁当「#{@bento.name}」を登録しました！"
     else
       render :new
     end
   end
 
+  def bento_logger
+    @bento_logger ||= Logger.new('log/bento.log', 'daily')
+  end
+  
   private
 
   def bento_params
