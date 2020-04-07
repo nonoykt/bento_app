@@ -2,7 +2,8 @@ class BentosController < ApplicationController
   before_action :set_bento, only: [:show, :edit, :update, :destroy]
 
   def index
-    @bentos = current_shop.bentos.order(created_at: :desc)
+    @q = current_shop.bentos.ransack(params[:q])
+    @bentos = @q.result(distinct: true)
   end
 
   def show
