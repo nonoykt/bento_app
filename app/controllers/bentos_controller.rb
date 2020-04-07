@@ -28,6 +28,11 @@ class BentosController < ApplicationController
   def create
     @bento = current_shop.bentos.new(bento_params)
 
+    if params[:back].present?
+      render :new
+      retuen
+    end
+
     if @bento.save
       logger.debug "bento: #{@bento.attributes.inspect}"
       redirect_to bentos_url, notice: "御弁当「#{@bento.name}」を登録しました！"
@@ -36,10 +41,15 @@ class BentosController < ApplicationController
     end
   end
 
+  def confirm_new
+    @bento = current_shop.bentos.new(bento_params)
+    render :new unless @bento.valid?
+  end
+
   def bento_logger
     @bento_logger ||= Logger.new('log/bento.log', 'daily')
   end
-  
+
   private
 
   def bento_params

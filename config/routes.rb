@@ -7,5 +7,7 @@ Rails.application.routes.draw do
   end
 
   root to: 'bentos#index'
-  resources :bentos
+  resources :bentos do
+    post :confirm, action: :confirm_new, on: :new
+  end
 end

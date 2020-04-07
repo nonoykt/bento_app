@@ -1,0 +1,15 @@
+h1 登録内容の確認
+
+= form_with model: @bento, local: true do |f|
+  table.table.table-hover
+    tbody
+      tr
+        th= Bento.human_attribute_name(:name)
+        td= @bento.name
+        = f.hidden_field :name
+      tr
+        th= Bento.human_attribute_name(:description)
+        td= simple_format(@bento.description)
+        = f.hidden_field :description
+  = f.submit '戻る', name: 'back', class: 'btn btn-secondary mr-3'
+  = f.submit '登録', class: 'btn btn-primary'
