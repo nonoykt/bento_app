@@ -9,5 +9,6 @@ Rails.application.routes.draw do
   root to: 'bentos#index'
   resources :bentos do
     post :confirm, action: :confirm_new, on: :new
+    post :import, on: :collection
   end
 end

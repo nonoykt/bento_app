@@ -4,6 +4,11 @@ class BentosController < ApplicationController
   def index
     @q = current_shop.bentos.ransack(params[:q])
     @bentos = @q.result(distinct: true)
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @bentos.generate_csv, filename: "bentos-#{Time.zone.now.strftime('%Y%m%d%S')}.csv"}
+    end
   end
 
   def show
@@ -50,6 +55,11 @@ class BentosController < ApplicationController
 
   def bento_logger
     @bento_logger ||= Logger.new('log/bento.log', 'daily')
+  end
+
+  def import
+    current_shop.bentos.import(params[:file])
+    redirect_to bentos_url, notice: "お弁当を追加しました。"
   end
 
   private
