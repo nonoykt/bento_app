@@ -1,4 +1,6 @@
 class Bento < ApplicationRecord
+  has_one_attached :image
+  
   def self.ransackbable_attributes(auth_object = nil)
     %w[name created_at]
   end
@@ -6,7 +8,7 @@ class Bento < ApplicationRecord
   def self.ransackable_associations(auth_object = nil)
     []
   end
-  
+
   before_validation :set_nameless_name
   validates :name, presence: true
   validates :name, length: { maximum: 30 }

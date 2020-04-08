@@ -55,7 +55,7 @@ class BentosController < ApplicationController
   private
 
   def bento_params
-    params.require(:bento).permit(:name, :description)
+    params.require(:bento).permit(:name, :description, :image)
   end
 
   def set_bento
