@@ -36,6 +36,7 @@ class BentosController < ApplicationController
 
     if @bento.save
       logger.debug "bento: #{@bento.attributes.inspect}"
+      BentoMailer.creation_email(@bento).deliver_now
       redirect_to bentos_url, notice: "御弁当「#{@bento.name}」を登録しました！"
     else
       render :new

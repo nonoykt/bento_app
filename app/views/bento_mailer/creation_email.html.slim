@@ -1,0 +1,9 @@
+| 以下の御弁当を作成しました
+
+ul
+  li
+    | 名称：
+    = @bento.name
+  li
+    | 詳しい説明：
+    = simple_format(@bento.description)
