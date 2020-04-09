@@ -3,7 +3,7 @@ class BentosController < ApplicationController
 
   def index
     @q = current_shop.bentos.ransack(params[:q])
-    @bentos = @q.result(distinct: true)
+    @bentos = @q.result(distinct: true).page(params[:page])
 
     respond_to do |format|
       format.html
