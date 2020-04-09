@@ -28,7 +28,7 @@ class BentosController < ApplicationController
 
   def destroy
     @bento.destroy
-    redirect_to bentos_url, notice: "御弁当「#{@bento.name}」を削除しました。"
+    head :no_content
   end
 
   def create
@@ -42,6 +42,7 @@ class BentosController < ApplicationController
     if @bento.save
       logger.debug "bento: #{@bento.attributes.inspect}"
       BentoMailer.creation_email(@bento).deliver_now
+      SampleJob.perform_later
       redirect_to bentos_url, notice: "御弁当「#{@bento.name}」を登録しました！"
     else
       render :new
