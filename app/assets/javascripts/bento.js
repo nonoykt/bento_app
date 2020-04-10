@@ -8,7 +8,7 @@ document.addEventListener('turbolinks:load', function(){
       e.currentTarget.style.backgroundColor = '';
     });
   });
-};
+});
 
 document.addEventListener('turbolinks:load', function() {
   document.querySelectorAll('.delete').forEach(function(a) {

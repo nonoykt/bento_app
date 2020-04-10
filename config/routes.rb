@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :users
+
   get '/login', to: 'sessions#new'
   match '/login', to: 'sessions#create', via: [:post, :patch, :put]
   delete '/logout', to: 'sessions#destroy'
