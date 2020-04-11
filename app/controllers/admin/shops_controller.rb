@@ -19,7 +19,7 @@ class Admin::ShopsController < ApplicationController
     @shop = Shop.new(shop_params)
 
     if @shop.save
-      redirect_to _url(@shop), notice: "ショップ「#{@shop.name}」を開店しました！"
+      redirect_to admin_shop_url(@shop), notice: "ショップ「#{@shop.name}」を開店しました！"
     else
       render :new
     end

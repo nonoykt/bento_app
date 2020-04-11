@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
+  post '/signup', to: 'users#create'
   resources :users
+
 
   get '/login', to: 'sessions#new'
   match '/login', to: 'sessions#create', via: [:post, :patch, :put]

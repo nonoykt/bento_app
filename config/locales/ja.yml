@@ -10,6 +10,7 @@ ja:
     models:
       bento: 御弁当
       shop: ショップ
+      user: ユーザー
     attributes:
       bento:
         id: ID
@@ -27,6 +28,11 @@ ja:
         password_confirmation: パスワード（確認）
         created_at: 登録日時
         updated_at: 更新日時
+      user:
+        name: ショップ名
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード（確認）
   date:
     abbr_day_names:
     - 日
